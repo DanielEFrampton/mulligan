@@ -13,6 +13,7 @@ RSpec.describe Deck, type: :model do
       should belong_to :game_type
       should have_many :deck_cards
       should have_many(:cards).through(:deck_cards)
+      should have_many :shuffles
     end
   end
 end
