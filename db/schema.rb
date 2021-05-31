@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_31_214824) do
+ActiveRecord::Schema.define(version: 2021_05_31_222038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2021_05_31_214824) do
     t.integer "batch_size_min"
     t.integer "batch_size_max"
     t.string "start_seed"
-    t.string "type"
+    t.integer "shuffle_type"
     t.integer "repetitions"
     t.integer "split_point"
     t.integer "split_margin_max"
