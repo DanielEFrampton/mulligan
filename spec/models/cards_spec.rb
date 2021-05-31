@@ -9,5 +9,9 @@ RSpec.describe Card, type: :model do
   end
 
   context 'relationships' do
+    it 'has the correct relationships' do
+      should have_many :deck_cards
+      should have_many(:decks).through(:deck_cards)
+    end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_31_213536) do
+ActiveRecord::Schema.define(version: 2021_05_31_213926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 2021_05_31_213536) do
     t.string "color"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "deck_cards", force: :cascade do |t|
+    t.bigint "deck_id", null: false
+    t.bigint "card_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["card_id"], name: "index_deck_cards_on_card_id"
+    t.index ["deck_id"], name: "index_deck_cards_on_deck_id"
   end
 
   create_table "decks", force: :cascade do |t|
@@ -46,6 +55,8 @@ ActiveRecord::Schema.define(version: 2021_05_31_213536) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "deck_cards", "cards"
+  add_foreign_key "deck_cards", "decks"
   add_foreign_key "decks", "game_types"
   add_foreign_key "game_types", "games"
 end

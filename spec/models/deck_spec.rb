@@ -11,6 +11,8 @@ RSpec.describe Deck, type: :model do
 
     it 'has the correct relationships' do
       should belong_to :game_type
+      should have_many :deck_cards
+      should have_many(:cards).through(:deck_cards)
     end
   end
 end
