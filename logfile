@@ -1,0 +1,2 @@
+2021-05-31 14:44:38.128 MDT [98346] FATAL:  database files are incompatible with server
+2021-05-31 14:44:38.128 MDT [98346] DETAIL:  The data directory was initialized by PostgreSQL version 12, which is not compatible with this version 13.3.
