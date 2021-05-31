@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_31_222038) do
+ActiveRecord::Schema.define(version: 2021_05_31_223744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,7 +67,9 @@ ActiveRecord::Schema.define(version: 2021_05_31_222038) do
     t.integer "split_margin_min"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "previous_shuffle_id"
     t.index ["deck_id"], name: "index_shuffles_on_deck_id"
+    t.index ["previous_shuffle_id"], name: "index_shuffles_on_previous_shuffle_id"
   end
 
   add_foreign_key "deck_cards", "cards"
@@ -75,4 +77,5 @@ ActiveRecord::Schema.define(version: 2021_05_31_222038) do
   add_foreign_key "decks", "game_types"
   add_foreign_key "game_types", "games"
   add_foreign_key "shuffles", "decks"
+  add_foreign_key "shuffles", "shuffles", column: "previous_shuffle_id"
 end

@@ -30,5 +30,6 @@ RSpec.describe Shuffle, type: :model do
 
   it 'should have the correct relationships' do
     should belong_to :deck
+    should have_one(:previous_shuffle).class_name('Shuffle')
   end
 end

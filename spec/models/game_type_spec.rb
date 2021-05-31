@@ -10,5 +10,10 @@ RSpec.describe GameType, type: :model do
     it 'has the correct relationships' do
       should belong_to :game
     end
+
+    it 'validates the correct parameters' do
+      should validate_presence_of :max_deck_size
+      should validate_presence_of :name
+    end
   end
 end
