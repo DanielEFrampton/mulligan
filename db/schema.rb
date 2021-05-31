@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_31_223744) do
+ActiveRecord::Schema.define(version: 2021_05_31_231820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "card_orders", force: :cascade do |t|
+    t.bigint "deck_card_id", null: false
+    t.bigint "shuffle_id", null: false
+    t.integer "position"
+    t.integer "pile"
+    t.integer "batch"
+    t.integer "repetition"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["deck_card_id"], name: "index_card_orders_on_deck_card_id"
+    t.index ["shuffle_id"], name: "index_card_orders_on_shuffle_id"
+  end
 
   create_table "cards", force: :cascade do |t|
     t.string "name"
@@ -72,6 +85,8 @@ ActiveRecord::Schema.define(version: 2021_05_31_223744) do
     t.index ["previous_shuffle_id"], name: "index_shuffles_on_previous_shuffle_id"
   end
 
+  add_foreign_key "card_orders", "deck_cards"
+  add_foreign_key "card_orders", "shuffles"
   add_foreign_key "deck_cards", "cards"
   add_foreign_key "deck_cards", "decks"
   add_foreign_key "decks", "game_types"
