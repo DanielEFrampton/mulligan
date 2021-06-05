@@ -54,5 +54,42 @@ RSpec.describe 'POST /shuffle endpoint', type: :request do
       expect(response.content_type).to eq "application/json; charset=utf-8"
       expect(response.body).to be
     end
+
+    context 'the parsed JSON response object' do
+      before do
+        @parsed = ActiveSupport::JSON.decode(response.body)
+      end
+
+      it 'includes the original deck' do
+        expect(@parsed).to include_json(
+          deck_before: [
+            {
+              name: "Ace of Spades"
+            },
+            {
+              name: "7 of Diamonds"
+            },
+            {
+              name: "Queen of Clubs"
+            },
+            {
+              name: "Jack of Hearts"
+            },
+            {
+              name: "2 of Clubs"
+            },
+            {
+              name: "Ace of Hearts"
+            },
+            {
+              name: "8 of Diamonds"
+            },
+            {
+              name: "9 of Diamonds"
+            }
+          ]
+        )
+      end
+    end
   end
 end
