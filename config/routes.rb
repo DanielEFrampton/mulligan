@@ -3,5 +3,7 @@ Rails.application.routes.draw do
 
   get '/', to: 'homepage#show'
 
+  resource :shuffle, only: [:create]
+
   resources :decks, only: [:show]
 end
