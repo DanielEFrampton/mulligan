@@ -46,8 +46,13 @@ RSpec.describe 'POST /shuffle endpoint', type: :request do
       post '/shuffle', params: post_params.to_json
     end
 
-    it 'returns a 204 response' do
-      expect(response.code).to eq '204'
+    it 'returns a 200 response' do
+      expect(response.code).to eq '200'
+    end
+
+    it 'returns a JSON body' do
+      expect(response.content_type).to eq "application/json; charset=utf-8"
+      expect(response.body).to be
     end
   end
 end
