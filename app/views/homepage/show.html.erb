@@ -3,5 +3,5 @@
 <%= form_with method: :get, local: true do |form| %>
   <%= form.label :deck, 'Deck' %>
   <%= form.collection_select :deck, @existing_decks, :id, :name %>
-  <%= form.submit 'Load Deck' %>
+  <%= form.submit 'Load Deck', name: nil, id: 'load-deck-btn' %>
 <% end %>
