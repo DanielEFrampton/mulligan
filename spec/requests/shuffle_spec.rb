@@ -37,12 +37,13 @@ RSpec.describe 'POST /shuffle endpoint', type: :request do
             config: {
               batch_size_min: 1,
               batch_size_max: 2,
-              split_margin_min: 1,
-              split_margin_max: 2
+              split_margin_min: 0,
+              split_margin_max: 1
             }
           }
         ]
       }
+      srand 12345
       post '/shuffle', params: post_params.to_json
     end
 
@@ -80,6 +81,37 @@ RSpec.describe 'POST /shuffle endpoint', type: :request do
             },
             {
               name: "Ace of Hearts"
+            },
+            {
+              name: "8 of Diamonds"
+            },
+            {
+              name: "9 of Diamonds"
+            }
+          ]
+        )
+      end
+
+      it 'includes the shuffled deck' do
+        expect(@parsed).to include_json(
+          deck_after: [
+            {
+              name: "2 of Clubs"
+            },
+            {
+              name: "Ace of Spades"
+            },
+            {
+              name: "7 of Diamonds"
+            },
+            {
+              name: "Ace of Hearts"
+            },
+            {
+              name: "Queen of Clubs"
+            },
+            {
+              name: "Jack of Hearts"
             },
             {
               name: "8 of Diamonds"
