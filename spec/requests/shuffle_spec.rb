@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'POST /shuffle endpoint', type: :request do
   context 'when I send a post request to the shuffle endpoint' do
-    before do
+    before(:all) do
       post_params = {
         deck: [
           {
@@ -32,18 +32,18 @@ RSpec.describe 'POST /shuffle endpoint', type: :request do
         ],
         shuffles: [
           {
-            type: "riffle",
+            shuffle_type: "riffle",
             repetitions: 1,
             config: {
               batch_size_min: 1,
               batch_size_max: 2,
               split_margin_min: 0,
-              split_margin_max: 1
+              split_margin_max: 1,
+              random_seed: 12345
             }
           }
         ]
       }
-      srand 12345
       post '/shuffle', params: post_params.to_json
     end
 
