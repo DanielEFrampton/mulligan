@@ -10,87 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_31_231820) do
+ActiveRecord::Schema.define(version: 0) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "card_orders", force: :cascade do |t|
-    t.bigint "deck_card_id", null: false
-    t.bigint "shuffle_id", null: false
-    t.integer "position"
-    t.integer "pile"
-    t.integer "batch"
-    t.integer "repetition"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["deck_card_id"], name: "index_card_orders_on_deck_card_id"
-    t.index ["shuffle_id"], name: "index_card_orders_on_shuffle_id"
-  end
-
-  create_table "cards", force: :cascade do |t|
-    t.string "name"
-    t.string "suit"
-    t.string "color"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "deck_cards", force: :cascade do |t|
-    t.bigint "deck_id", null: false
-    t.bigint "card_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["card_id"], name: "index_deck_cards_on_card_id"
-    t.index ["deck_id"], name: "index_deck_cards_on_deck_id"
-  end
-
-  create_table "decks", force: :cascade do |t|
-    t.string "name"
-    t.bigint "game_type_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["game_type_id"], name: "index_decks_on_game_type_id"
-  end
-
-  create_table "game_types", force: :cascade do |t|
-    t.string "name"
-    t.integer "max_deck_size"
-    t.bigint "game_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["game_id"], name: "index_game_types_on_game_id"
-  end
-
-  create_table "games", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "shuffles", force: :cascade do |t|
-    t.bigint "deck_id", null: false
-    t.integer "batch_size_min"
-    t.integer "batch_size_max"
-    t.string "start_seed"
-    t.integer "shuffle_type"
-    t.integer "repetitions"
-    t.integer "split_point"
-    t.integer "split_margin_max"
-    t.integer "split_margin_min"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "previous_shuffle_id"
-    t.index ["deck_id"], name: "index_shuffles_on_deck_id"
-    t.index ["previous_shuffle_id"], name: "index_shuffles_on_previous_shuffle_id"
-  end
-
-  add_foreign_key "card_orders", "deck_cards"
-  add_foreign_key "card_orders", "shuffles"
-  add_foreign_key "deck_cards", "cards"
-  add_foreign_key "deck_cards", "decks"
-  add_foreign_key "decks", "game_types"
-  add_foreign_key "game_types", "games"
-  add_foreign_key "shuffles", "decks"
-  add_foreign_key "shuffles", "shuffles", column: "previous_shuffle_id"
 end
