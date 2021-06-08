@@ -37,6 +37,7 @@ group :development, :test do
   gem 'rspec-json_expectations'
   gem 'graphql'
   gem 'graphiql-rails'
+  gem 'simplecov'
 end
 
 group :development do
