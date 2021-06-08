@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "9b703ec8-2515-42c9-9d12-91619eb99a08",
+		"name": "Mulligan API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Mulligan API - POST /shuffle",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"deck\": [\n        {\n            \"name\": \"Ace of Spades\"\n        },\n        {\n            \"name\": \"7 of Diamonds\"\n        },\n        {\n            \"name\": \"Queen of Clubs\"\n        },\n        {\n            \"name\": \"Jack of Hearts\"\n        },\n        {\n            \"name\": \"2 of Clubs\"\n        },\n        {\n            \"name\": \"Ace of Hearts\"\n        },\n        {\n            \"name\": \"8 of Diamonds\"\n        },\n        {\n            \"name\": \"9 of Diamonds\"\n        }\n    ],\n        \"shuffle_requests\": [\n        {\n            \"shuffle_type\": \"riffle\",\n            \"repetitions\": 1,\n            \"config\": {\n              \"batch_size_min\": 1,\n              \"batch_size_max\": 2,\n              \"split_margin_min\": 0,\n              \"split_margin_max\": 1,\n              \"random_seed\": 12345\n            }\n        },\n                {\n            \"shuffle_type\": \"riffle\",\n            \"repetitions\": 3,\n            \"config\": {\n              \"batch_size_min\": 1,\n              \"batch_size_max\": 5,\n              \"split_margin_min\": 0,\n              \"split_margin_max\": 2\n            }\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/shuffle",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"shuffle"
+					]
+				},
+				"description": "Example request to Mulligan API."
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
