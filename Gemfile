@@ -35,6 +35,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'capybara'
   gem 'rspec-json_expectations'
+  gem 'jsonapi-serializer'
 end
 
 group :development do

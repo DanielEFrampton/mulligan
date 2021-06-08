@@ -1,8 +1,10 @@
 class ShuffleData
   attr_reader :final_order, :batches, :shuffle_type, :config, :deck_before,
-    :random_seed, :piles, :split_point
+    :random_seed, :piles, :split_point, :id
 
-  def initialize(shuffle_data, deck_before)
+  def initialize(id, shuffle_data, deck_before)
+    # Create ID for OpenAPI spec adherence
+    @id = id
     # Create instance methods with arguments.
     @shuffle_type = shuffle_data[:shuffle_type]
     @repetitions = shuffle_data[:repetitions] # not needed here, move up

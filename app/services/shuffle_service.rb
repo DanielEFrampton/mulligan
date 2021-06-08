@@ -1,9 +1,11 @@
 class ShuffleService
-  attr_reader :deck_after
+  attr_reader :deck_after, :id, :deck_before, :shuffles
 
   def initialize(request_data)
+    @id = 1
     @deck = request_data['deck']
     @shuffles = []
+    shuffle_counter = 1
     # Iterate over shuffle requests
     request_data['shuffles'].each.with_index do |shuffle, index|
       shuffles_aggregator = []
@@ -12,17 +14,27 @@ class ShuffleService
         # Use original deck only on the first shuffle for first type
         deck_to_use = index == 0 && time == 0 ? @deck : @previous_shuffle_deck
         # Instantiate shuffle object
-        new_shuffle = ShuffleData.new(shuffle.symbolize_keys, deck_to_use)
+        new_shuffle = ShuffleData.new(shuffle_counter, shuffle.symbolize_keys, deck_to_use)
         # Save newly shuffled state to pass to next shuffle
         @previous_shuffle_deck = new_shuffle.final_order
         # Add new shuffle to overall collection
         @shuffles << new_shuffle
+        # Increment counter for shuffle ID
+        shuffle_counter += 1
       end
     end
+  end
+
+  def deck_before
+    @deck
   end
   
   def deck_after
     @shuffles.last.final_order
+  end
+
+  def shuffle_ids
+    @shuffles.map(&:id)
   end
 
   def report
