@@ -30,7 +30,7 @@ RSpec.describe 'POST /shuffle endpoint', type: :request do
             name: "9 of Diamonds"
           }
         ],
-        shuffles: [
+        shuffle_requests: [
           {
             shuffle_type: "riffle",
             repetitions: 1,

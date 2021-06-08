@@ -30,17 +30,15 @@ RSpec.describe ShuffleData do
             name: "9 of Diamonds"
           }
         ]
-        shuffle_data = {
-          shuffle_type: "riffle",
-          repetitions: 1,
-          config: {
-            batch_size_min: 1,
-            batch_size_max: 2,
-            split_margin_min: 0,
-            split_margin_max: 1,
-            random_seed: 12345
-          }
+        shuffle_type = "riffle"
+        config_data = {
+          batch_size_min: 1,
+          batch_size_max: 2,
+          split_margin_min: 0,
+          split_margin_max: 1,
+          random_seed: 12345
         }
+        config = Config.new(config_data)
         expected_final_order = [
           {
             name: "2 of Clubs"
@@ -68,7 +66,7 @@ RSpec.describe ShuffleData do
           }
         ]
 
-        shuffle_data = ShuffleData.new(shuffle_data, cards)
+        shuffle_data = ShuffleData.new(shuffle_type, config, cards)
 
         expect(shuffle_data.final_order).to eq expected_final_order
       end
