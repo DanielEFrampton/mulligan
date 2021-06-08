@@ -2,17 +2,12 @@ class ShuffleData
   attr_reader :final_order, :batches, :shuffle_type, :config, :deck_before,
     :random_seed, :piles, :split_point
 
-  def initialize(shuffle_data, deck_before)
+  def initialize(shuffle_type, config, deck_before)
     # Create instance methods with arguments.
-    @shuffle_type = shuffle_data[:shuffle_type]
-    @repetitions = shuffle_data[:repetitions] # not needed here, move up
-    @config = shuffle_data[:config].symbolize_keys
+    @shuffle_type = shuffle_type
+    @config = config
+    @rng = @config.rng
     @deck_before = deck_before
-
-    # Save random seed if provided, otherwise generate one and save it
-    @random_seed = @config[:random_seed] || generate_random_seed
-    # If random seed was provided, generate Random instance with it.
-    @rng ||= Random.new(@random_seed)
 
     # Initialize empty arrays to be populated by generation script.
     @piles = []
@@ -29,7 +24,7 @@ class ShuffleData
       # Save deck length for repeat use.
       deck_length = @deck_before.length
       # Randomly select split margin from range of min to max numbers.
-      split_margin = @rng.rand(@config[:split_margin_min]..@config[:split_margin_max])
+      split_margin = @rng.rand(@config.split_margin_min..@config.split_margin_max)
       # Randomly select actual split point from range.
       pos_or_neg = @rng.rand(-split_margin..split_margin)
       # Calculate actual split point.
@@ -52,7 +47,7 @@ class ShuffleData
       # Main loop
       until working_piles[current_pile].empty?
         # Randomly select batch amount from min-max range.
-        batch_amount = @rng.rand(@config[:batch_size_min]..@config[:batch_size_max])
+        batch_amount = @rng.rand(@config.batch_size_min..@config.batch_size_max)
         # Pop that amount from current working pile.
         card_batch = working_piles[current_pile].pop(batch_amount)
         # Prepend that batch to final order.
@@ -86,10 +81,5 @@ class ShuffleData
     else
       raise 'Unsupported shuffle type requested.'
     end
-  end
-  
-  def generate_random_seed
-    @rng = Random.new
-    @rng.seed
   end
 end
