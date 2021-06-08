@@ -35,6 +35,8 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'capybara'
   gem 'rspec-json_expectations'
+  gem 'graphql'
+  gem 'graphiql-rails'
 end
 
 group :development do
