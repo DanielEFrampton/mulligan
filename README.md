@@ -2,6 +2,8 @@
 
 A Rails API that provides deterministic simulations of physical card shuffling for use in games, shuffle analysis tools, upping your Magic tournament play, or just plain nerdy curiosity. Consumable via both a GraphQL endpoint and REST endpoint.
 
+This MVP version of Mulligan API was developed over the course of about 2 cumulative days using TDD/BDD development methodologies and a top-down design planning process.
+
 ## Local deployment
 
 - Pull down branch
@@ -12,6 +14,22 @@ A Rails API that provides deterministic simulations of physical card shuffling f
 - Consume the API through either of two ways:
   - Open [http://localhost:3000/graphiql]() in your browser and execute the sample request in GraphiQL
   - Import the example [Postman](https://www.postman.com/) collection included in the repo (Mulligan API.postman_collection.json)
+
+## Testing & coverage
+
+To run the RSpec test suite, run `bundle exec rspec` in the project directory.
+
+Test results as of MVP release:
+```
+......
+
+Finished in 0.13002 seconds (files took 3.6 seconds to load)
+6 examples, 0 failures
+
+Coverage report generated for RSpec to ... 246 / 266 LOC (92.48%) covered.
+```
+
+![SimpleCov Report](public/readme-images/simplecov_report.png)
 
 ## How it works
 
@@ -26,6 +44,8 @@ This repo contains the MVP for the Mulligan API, and one stretch goal: the Graph
 - Third-party API integration to import decks from card sources like Scryfall.
 - Live remote deployment and CI/CD integration (e.g., Firebase and CircleCI).
 - Example FE showcasing shuffle animations made possible by the API's batch information.
+
+![Future schema](public/readme-images/future_schema.png)
 
 Additionally, there are many known weaknesses that could be improved upon:
 - Consistent unit testing of all POROs (plain old Ruby objects) and their public and private methods
